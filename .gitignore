@@ -1,0 +1,4 @@
+*.spec
+inativo
+__pycache__
+build
