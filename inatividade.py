@@ -54,7 +54,7 @@ while True:
             time.sleep(1)
             inativo += 1
             pscZ, pscT = pyautogui.position()
-            if ( inativo > 300 ):
+            if ( inativo > espera ):
                 tempoAcumulado += inativo
                 gravaInatividade(arqInativo,tempoAcumulado)
                 inativo = 0
