@@ -15,10 +15,9 @@ import keyboard
 
 def abreArquivoContador(arquivo):
     arqInativo = open(arquivo, 'w')
-    tempoAcumulado = 0
-    arqInativo.write(str(tempoAcumulado))
+    arqInativo.write("0")
     arqInativo.close()
-    return int(tempoAcumulado)
+    return 0
     
 def gravaInatividade(arquivo, tempo):
     arqInativo = open(arquivo, 'w')
@@ -38,11 +37,11 @@ teclaPressionada = ""
 arqInativo = "inativo"
 espera = 300
 
-threads = [Thread(target=funcs.listen, kwargs={"tecla":tecla}) for tecla in teclado]
+threads = [Thread(target=listen, kwargs={"tecla":tecla}) for tecla in teclado]
 for thread in threads:
 	thread.start()
 
-tempoAcumulado = funcs.abreArquivoContador(arqInativo)
+tempoAcumulado = abreArquivoContador(arqInativo)
 inativo = 0
 grava = False
 while True:
@@ -57,7 +56,7 @@ while True:
             pscZ, pscT = pyautogui.position()
             if ( inativo > 300 ):
                 tempoAcumulado += inativo
-                funcs.gravaInatividade(arqInativo,tempoAcumulado)
+                gravaInatividade(arqInativo,tempoAcumulado)
                 inativo = 0
     else:
         if ( teclaPressionada == ultimaTecla ):
@@ -66,7 +65,7 @@ while True:
             grava = True    
     if grava:
         tempoAcumulado += inativo
-        funcs.gravaInatividade(arqInativo,tempoAcumulado)
+        gravaInatividade(arqInativo,tempoAcumulado)
         inativo = 0
         teclaPressionada = ""
         grava = False
