@@ -16,8 +16,6 @@ import sys
 
 
 def abreArquivoContador(arquivo):
-    if ( hasattr(sys, '_MEIPASS') ):
-        os.chdir(sys._MEIPASS)
     arqInativo = open(arquivo, 'w')
     arqInativo.write("0")
     arqInativo.close()
@@ -39,7 +37,7 @@ def listen(tecla):
 
 teclado = list(string.ascii_lowercase)
 teclaPressionada = ""
-arqInativo = "inativo"
+arqInativo = "c:\zabbix\inativo"
 espera = 300
 
 threads = [Thread(target=listen, kwargs={"tecla":tecla}) for tecla in teclado]
