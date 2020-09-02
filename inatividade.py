@@ -37,7 +37,7 @@ def listen(tecla):
 
 teclado = list(string.ascii_lowercase)
 teclaPressionada = ""
-arqInativo = "c:\zabbix\inativo"
+arqInativo = "inativo"
 espera = 300
 
 threads = [Thread(target=listen, kwargs={"tecla":tecla}) for tecla in teclado]
