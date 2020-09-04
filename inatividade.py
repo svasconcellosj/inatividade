@@ -16,6 +16,8 @@ import sys
 
 
 def abreArquivoContador(arquivo):
+    if ( os.isfile(arquivo) ):
+        os.remove(arquivo)
     arqInativo = open(arquivo, 'w')
     arqInativo.write("0")
     arqInativo.close()
@@ -38,7 +40,7 @@ def listen(tecla):
 teclado = list(string.ascii_lowercase)
 teclaPressionada = ""
 arqInativo = "inativo"
-espera = 300
+espera = 5
 
 threads = [Thread(target=listen, kwargs={"tecla":tecla}) for tecla in teclado]
 for thread in threads:
