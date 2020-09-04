@@ -15,20 +15,11 @@ import keyboard
 import sys
 
 
-def abreArquivoContador(arquivo):
-    if ( os.isfile(arquivo) ):
-        os.remove(arquivo)
-    arqInativo = open(arquivo, 'w')
-    arqInativo.write("0")
-    arqInativo.close()
-    return 0
-    
+#### Funções de manipulações###    
 def gravaInatividade(arquivo, tempo):
     arqInativo = open(arquivo, 'w')
     arqInativo.write(str(tempo))
     arqInativo.close()
-
-	
 
 def listen(tecla):
 	global teclaPressionada
@@ -36,19 +27,22 @@ def listen(tecla):
 		keyboard.wait(tecla)
 		teclaPressionada = tecla
 
-
 teclado = list(string.ascii_lowercase)
-teclaPressionada = ""
-arqInativo = "inativo"
-espera = 5
 
 threads = [Thread(target=listen, kwargs={"tecla":tecla}) for tecla in teclado]
 for thread in threads:
 	thread.start()
 
-tempoAcumulado = abreArquivoContador(arqInativo)
+### Início  ###
+teclaPressionada = ""
+arqInativo = "c:\zabbix\inativo"
+espera = 300
+tempoAcumulado = 0
 inativo = 0
 grava = False
+
+gravaInatividade(arqInativo,tempoAcumulado)
+
 while True:
     pscX, pscY = pyautogui.position()
     time.sleep(espera)
